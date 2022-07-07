@@ -20,26 +20,32 @@ protocol GameListViewInterface: AnyObject {
 }
 
 
+
 protocol GameListPresenterInterface: AnyObject{
     // GameListView -> GameListPresenter
     func notifyViewLoaded()
     func notifyViewWillAppear()
-    func gameSelected()
-    func getGameViewModels() -> [GameViewModel]?
+    func didSelectRowAt(indexPath: IndexPath)
+    func getGameModels() -> [Game]?
     // GameListInteractor -> GameListPresenter
     func gameListFetced(gameList:[Game])
     func gameListFetchFailed(with errorMessage:String)
+    func gameDetailFetced(with game:Game)
+    func gameDetailFethFailed(with errorMessage: String)
+    func cellForItemAt(row: Int) -> Game?
 }
 
 
 protocol GameListRouterInterface {
     // GameListPresenter -> GameListRouter
     func popBack()
-    func performSegue(with identifier:String)
+    func goGameDetail(with game: Game)
+    
     func presentPopup(with message:String)
 }
 
 protocol GameListInteractorInterface {
     // GameListPresenter -> GameListInteractor
     func fetchGameList()
+    func fetchGameDetail()
 }

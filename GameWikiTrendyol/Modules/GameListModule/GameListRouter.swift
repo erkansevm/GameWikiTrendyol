@@ -15,33 +15,34 @@ class GameListRouter {
     static func createModule(using navigationController: UINavigationController) -> GameListViewController {
         // Create layers
         let router = GameListRouter()
-        let presenter = GameListPresenter()
         let interactor = GameListInteractor()
-        
-        let view = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Bla bla") as! GameListViewController
-        
+        let presenter = GameListPresenter(router: router, interactor: interactor)
+
+        let gameListStoryBoard = AppStoryboard.GameList.instance
+        let gameListView = gameListStoryBoard.instantiateViewController(withIdentifier: "GameListViewController") as! GameListViewController
         // Connect Layers
-        presenter.interactor = interactor
-        presenter.router = router
-        presenter.view = view
-        view.presenter = presenter
+        presenter.view = gameListView
+        gameListView.presenter = presenter
         interactor.presenter = presenter
         router.presenter = presenter
         router.navigationController = navigationController
         
-        return view
+        return gameListView
     }
 }
 
 
 extension GameListRouter: GameListRouterInterface {
+    func goGameDetail(with game: Game) {
+        print(game)
+        let vc = GameDetailRouter.createModule(game: game)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func popBack() {
         self.navigationController?.popViewController(animated: true)
     }
-    
-    func performSegue(with identifier: String) {
-        self.navigationController?.visibleViewController?.performSegue(withIdentifier: identifier, sender: nil)
-    }
+ 
     
     func presentPopup(with message: String) {
         let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)

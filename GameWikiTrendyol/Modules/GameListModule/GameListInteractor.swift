@@ -13,6 +13,11 @@ class GameListInteractor {
 }
 
 extension GameListInteractor: GameListInteractorInterface {
+    func fetchGameDetail() {
+        
+    }
+    
+    
     func fetchGameList() {
         service.fetchFirstPage(expectedType: GameResult.self) {[weak self] result in
             switch result {
@@ -24,5 +29,8 @@ extension GameListInteractor: GameListInteractorInterface {
             }
         }
     }
+    
+    
+    
 
 }

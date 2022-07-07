@@ -11,6 +11,7 @@ private enum URLS: String {
     case baseUrl = "https://api.rawg.io/api"
     case apiKey = "0e50318730bf4480877af913a2a170c2"
     case firstPage = "https://api.rawg.io/api/games?key=0e50318730bf4480877af913a2a170c2"
+
 }
 
 enum NetworkError: Error {
@@ -19,6 +20,11 @@ enum NetworkError: Error {
 
 final class NetworkManager {
     static let shared = NetworkManager()
+    
+    func fetchGame(with id: Int, completion: @escaping (Result<String, NetworkError>) -> Void) {
+        let urlString = "\(URLS.baseUrl.rawValue)/games/\(id)?key=\(URLS.apiKey.rawValue)"
+        print(urlString)
+    }
     
     func fetchFirstPage<T: Codable>( expectedType: T.Type, completion: @escaping (Result<T, NetworkError>) -> Void) {
         guard let url = URL(string: URLS.firstPage.rawValue) else {
