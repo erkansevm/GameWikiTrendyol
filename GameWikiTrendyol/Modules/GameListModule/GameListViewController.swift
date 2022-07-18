@@ -69,7 +69,7 @@ extension GameListViewController: UICollectionViewDataSource, UICollectionViewDe
     
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameItemCell", for: indexPath) as! GameItemCollectionViewCell
         let game = presenter?.cellForItemAt(row: indexPath.row)
-        cell.configure(viewModel: game ?? Game(id: 0, name: "no data", released: "no data", metacritic: 0))
+        cell.configure(viewModel: game ?? Game(id: 0, name: "no data", released: "no data", metacritic: 0, description_raw: " "))
         return cell
     }
     

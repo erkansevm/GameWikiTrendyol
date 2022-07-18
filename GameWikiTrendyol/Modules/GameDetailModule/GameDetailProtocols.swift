@@ -13,6 +13,7 @@ protocol GameDetailViewInterface: AnyObject {
     func setupView()
     func setScreenTitle(with title: String)
     func setupData()
+    func changeDescp(with descExpanded: Bool)
 }
 
 
@@ -21,14 +22,16 @@ protocol GameDetailRouterInterface: AnyObject {
 }
 
 protocol GameDetailInteractorInterface: AnyObject {
-    func fetchGameDetail()
+    func fetchGameDetail(gameId: Int)
 }
 
 protocol GameDetailPresenterInterface: AnyObject {
-    func getGameDetail() -> Game?
+    func getGameDetail() -> GameDetail?
     func notifyViewDidLoad()
     func notifyViewWillAppear()
-    func gameDetailFetched(gameDetail: Game)
+    func didTapDesc()
+    func gameDetailFetched(gameDetail: GameDetail)
+    func gameDetailFethFailed(error: NetworkError)
 }
 
 

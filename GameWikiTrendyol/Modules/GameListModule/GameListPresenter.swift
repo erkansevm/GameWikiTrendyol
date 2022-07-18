@@ -38,7 +38,7 @@ extension GameListPresenter: GameListPresenterInterface {
     func didSelectRowAt(indexPath: IndexPath) {
         guard let gameModel = games?[indexPath.row] else { return }
         print(gameModel)
-        router.goGameDetail(with: gameModel)
+        router.goGameDetail(with: gameModel.id)
     }
     
     func cellForItemAt(row: Int) -> Game? {
