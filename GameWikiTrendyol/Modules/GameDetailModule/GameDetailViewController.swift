@@ -16,6 +16,9 @@ class GameDetailViewController: UIViewController {
     @IBOutlet weak var genresLabel: UILabel!
     @IBOutlet weak var playTimeLabel: UILabel!
     @IBOutlet weak var publishersLabel: UILabel!
+    @IBOutlet weak var visitRedditStack: UIStackView!
+    @IBOutlet weak var visitWebsiteStack: UIStackView!
+    
     
     
     var presenter: GameDetailPresenterInterface?
@@ -34,6 +37,12 @@ class GameDetailViewController: UIViewController {
         presenter?.didTapDesc()
     }
     
+    @IBAction func didTapVisitReddit(sender: UITapGestureRecognizer){
+        presenter?.didTapVisitReddit()
+    }
+    @IBAction func didTapVisitWebsite(sender: UITapGestureRecognizer){
+        presenter?.didTapVisitWebsite()
+    }
 }
 
 extension GameDetailViewController: GameDetailViewInterface {
@@ -43,6 +52,7 @@ extension GameDetailViewController: GameDetailViewInterface {
     }
     
     func setupView() {
+        self.metacriticLabel.borderWidth = 2
         
     }
     
@@ -61,6 +71,10 @@ extension GameDetailViewController: GameDetailViewInterface {
             self.playTimeLabel.text = "\(game.playtime ?? 0) hours"
             self.genresLabel.text = "\(game.genresString)"
             self.publishersLabel.text = "\(game.publishersString)"
+            self.visitRedditStack.isHidden = game.redditUrl != nil ? false : true
+            self.visitWebsiteStack.isHidden = game.website != nil ? false : true
+            self.metacriticLabel.textColor = game.color ?? .label
+            self.metacriticLabel.borderColor = game.color ?? .label
         }
         
     }

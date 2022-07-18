@@ -5,6 +5,8 @@
 //  Created by Erkan Sevim on 4.07.2022.
 //
 
+import UIKit
+
 
 
 
@@ -30,6 +32,10 @@ class GameDetailRouter {
 
 
 extension GameDetailRouter: GameDetailRouterInterface {
+    func openSafari(with url: URL) {
+        UIApplication.shared.open(url)
+    }
+    
     func goBack() {
         print("go back")
     }

@@ -5,6 +5,8 @@
 //  Created by Erkan Sevim on 4.07.2022.
 //
 
+import Foundation
+
 
 
 
@@ -19,6 +21,7 @@ protocol GameDetailViewInterface: AnyObject {
 
 protocol GameDetailRouterInterface: AnyObject {
     func goBack()
+    func openSafari(with url: URL)
 }
 
 protocol GameDetailInteractorInterface: AnyObject {
@@ -30,6 +33,9 @@ protocol GameDetailPresenterInterface: AnyObject {
     func notifyViewDidLoad()
     func notifyViewWillAppear()
     func didTapDesc()
+    func didTapVisitReddit()
+    func didTapVisitWebsite()
+    
     func gameDetailFetched(gameDetail: GameDetail)
     func gameDetailFethFailed(error: NetworkError)
 }

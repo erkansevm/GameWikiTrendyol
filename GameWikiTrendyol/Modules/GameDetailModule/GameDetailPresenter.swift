@@ -23,6 +23,26 @@ class GameDetailPresenter {
 }
 
 extension GameDetailPresenter: GameDetailPresenterInterface {
+    func didTapVisitReddit() {
+        guard let gameDetail = gameDetail,
+              let urlString = gameDetail.redditUrl,
+              let url = URL(string: urlString)
+        else {
+            return
+        }
+        router.openSafari(with: url)
+    }
+    
+    func didTapVisitWebsite() {
+        guard let gameDetail = gameDetail,
+              let urlString = gameDetail.website,
+              let url = URL(string: urlString)
+        else {
+            return
+        }
+        router.openSafari(with: url)
+    }
+    
     func didTapDesc() {
         descExpanded.toggle()
         view?.changeDescp(with: descExpanded)

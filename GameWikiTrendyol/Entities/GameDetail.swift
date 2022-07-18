@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 
 struct GameDetail: Codable {
@@ -17,7 +18,8 @@ struct GameDetail: Codable {
     let genres: [Genre]?
     let playtime: Int?
     let publishers: [Publisher]?
-    
+    let redditUrl: String?
+    let website: String?
     var genresString: String {
         get {
             var genresString = ""
@@ -44,6 +46,25 @@ struct GameDetail: Codable {
                 
             }
             return publishersString
+        }
+    }
+    
+    var color: UIColor? {
+        get {
+            guard let metacritic = metacritic else {
+                return nil
+            }
+            
+            switch metacritic {
+            case 0..<50:
+                return UIColor.systemRed
+            case 50..<75:
+                return UIColor.systemYellow
+            case 75..<100:
+                return UIColor.systemGreen
+            default:
+                return nil
+            }
         }
     }
 }
