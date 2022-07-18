@@ -10,11 +10,16 @@ import Foundation
 class GameListInteractor {
     let service = NetworkManager()
     weak var presenter: GameListPresenterInterface?
+    var next: String?
+    var prev: String?
+    
 }
 
 extension GameListInteractor: GameListInteractorInterface {
    
-    
+    func fetchNextPage(){
+        
+    }
     func fetchGameList() {
         service.fetchFirstPage(expectedType: GameResult.self) {[weak self] result in
             switch result {

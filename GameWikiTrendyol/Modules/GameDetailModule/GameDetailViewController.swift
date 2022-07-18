@@ -79,11 +79,6 @@ extension GameDetailViewController: GameDetailViewInterface {
         
     }
     
-    
-    func setupInformation(){
-        
-    }
-    
     func setScreenTitle(with title: String) {
         self.title = title
     }
