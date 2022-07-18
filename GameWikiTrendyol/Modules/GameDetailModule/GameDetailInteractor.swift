@@ -9,16 +9,22 @@ import Foundation
 
 
 class GameDetailInteractor {
-    let game: Game
+    let service = NetworkManager()
     weak var presenter: GameDetailPresenter?
     
-    init(game: Game){
-        self.game = game
-    }
 }
 
 extension GameDetailInteractor: GameDetailInteractorInterface {
-    func fetchGameDetail() {
-        presenter?.gameDetailFetched(gameDetail: game)
+
+    
+    func fetchGameDetail(gameId: Int) {
+        service.fetchGame(with: gameId) { [weak self] result in
+            switch result {
+            case .success(let gameDetail):
+                self?.presenter?.gameDetailFetched(gameDetail: gameDetail)
+            case .failure(let error):
+                self?.presenter?.gameDetailFethFailed(error: error)
+            }
+        }
     }
 }

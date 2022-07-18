@@ -33,9 +33,10 @@ class GameListRouter {
 
 
 extension GameListRouter: GameListRouterInterface {
-    func goGameDetail(with game: Game) {
-        print(game)
-        let vc = GameDetailRouter.createModule(game: game)
+   
+    func goGameDetail(with gameId: Int) {
+        print(gameId)
+        let vc = GameDetailRouter.createModule(gameId: gameId )
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -45,9 +46,12 @@ extension GameListRouter: GameListRouterInterface {
  
     
     func presentPopup(with message: String) {
-        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "AllRight", style: .default, handler: nil))
-        self.navigationController?.visibleViewController?.present(alertController, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "AllRight", style: .default, handler: nil))
+            self.navigationController?.visibleViewController?.present(alertController, animated: true, completion: nil)
+            
+        }
     }
     
     

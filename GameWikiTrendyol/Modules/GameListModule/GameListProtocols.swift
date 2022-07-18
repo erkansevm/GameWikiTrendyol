@@ -39,7 +39,7 @@ protocol GameListPresenterInterface: AnyObject{
 protocol GameListRouterInterface {
     // GameListPresenter -> GameListRouter
     func popBack()
-    func goGameDetail(with game: Game)
+    func goGameDetail(with gameId: Int)
     
     func presentPopup(with message:String)
 }
@@ -47,5 +47,4 @@ protocol GameListRouterInterface {
 protocol GameListInteractorInterface {
     // GameListPresenter -> GameListInteractor
     func fetchGameList()
-    func fetchGameDetail()
 }
