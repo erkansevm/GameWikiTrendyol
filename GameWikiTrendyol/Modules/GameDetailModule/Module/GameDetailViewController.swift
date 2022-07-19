@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GameDetailViewController: UIViewController {
+final class GameDetailViewController: UIViewController {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var metacriticLabel: UILabel!
@@ -61,8 +61,7 @@ extension GameDetailViewController: GameDetailViewInterface {
             print("no game")
             return
         }
-        
-        
+        print(game)
         DispatchQueue.main.async {
             self.nameLabel.text = game.name
             self.metacriticLabel.text = "\(game.metacritic ?? -1)"
