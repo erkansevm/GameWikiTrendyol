@@ -10,13 +10,10 @@ import Foundation
 final class GameListInteractor {
     let service = NetworkManager()
     weak var presenter: GameListPresenterInterface?
-<<<<<<< HEAD:GameWikiTrendyol/Modules/GameListModule/GameListInteractor.swift
     var next: String?
     var prev: String?
-    
-=======
+
     let service2 = GameService()
->>>>>>> 64624cf83085315a4de4060e3dd949bcb9304a66:GameWikiTrendyol/Modules/GameListModule/Module/GameListInteractor.swift
 }
 
 extension GameListInteractor: GameListInteractorInterface {
