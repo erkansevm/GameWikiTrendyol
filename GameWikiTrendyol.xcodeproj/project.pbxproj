@@ -87,6 +87,7 @@
 		607496162872E261002B7D4E /* GameDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailViewController.swift; sourceTree = "<group>"; };
 		607496182872E26F002B7D4E /* GameDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GameDetail.storyboard; sourceTree = "<group>"; };
 		6074961A28771845002B7D4E /* GameDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetail.swift; sourceTree = "<group>"; };
+		608598DF2886DD7B002328DE /* Empty.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Empty.md; sourceTree = "<group>"; };
 		60949E80286C388D002D1B52 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		6098C48C2869A9700052B8F7 /* GameWikiTrendyol.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameWikiTrendyol.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6098C48F2869A9700052B8F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -197,6 +198,7 @@
 				6098C4982869A9710052B8F7 /* Assets.xcassets */,
 				6098C49A2869A9710052B8F7 /* LaunchScreen.storyboard */,
 				6098C49D2869A9710052B8F7 /* Info.plist */,
+				608598DF2886DD7B002328DE /* Empty.md */,
 			);
 			path = GameWikiTrendyol;
 			sourceTree = "<group>";
