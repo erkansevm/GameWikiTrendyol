@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TabBarViewController: UITabBarController {
+final class TabBarViewController: UITabBarController {
     static let identifier: String = "TabBarViewController"
     var presenter: TabBarPresenterInterface?
     

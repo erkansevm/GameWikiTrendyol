@@ -7,7 +7,7 @@
 
 import Foundation
 
-class GameDetailPresenter {
+final class GameDetailPresenter {
     weak var view: GameDetailViewInterface?
     var router: GameDetailRouterInterface
     var interactor: GameDetailInteractorInterface

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GameListRouter {
+final class GameListRouter {
     weak var presenter: GameListPresenterInterface?
     weak var navigationController: UINavigationController?
     

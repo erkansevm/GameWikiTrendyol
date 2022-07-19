@@ -7,15 +7,17 @@
 
 import Foundation
 
-class GameListInteractor {
+final class GameListInteractor {
     let service = NetworkManager()
     weak var presenter: GameListPresenterInterface?
+    let service2 = GameService()
 }
 
 extension GameListInteractor: GameListInteractorInterface {
    
     
     func fetchGameList() {
+        /*
         service.fetchFirstPage(expectedType: GameResult.self) {[weak self] result in
             switch result {
                 
@@ -23,6 +25,17 @@ extension GameListInteractor: GameListInteractorInterface {
                 self?.presenter?.gameListFetced(gameList: gameResult.results)
             case .failure(let error):
                 self?.presenter?.gameListFetchFailed(with: error.localizedDescription)
+            }
+        }
+        */
+        Task(priority: .background) {
+            
+            let result = await service2.getGameList()
+            switch result {
+            case .success(let gameListResponse):
+                presenter?.gameListFetced(gameList: gameListResponse.results)
+            case .failure( let error):
+                presenter?.gameListFetchFailed(with: error.localizedDescription)
             }
         }
     }
