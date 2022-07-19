@@ -7,7 +7,7 @@
 
 import Foundation
 
-private enum URLS: String {
+public enum URLS: String {
     case baseUrl = "https://api.rawg.io/api"
     case apiKey = "0e50318730bf4480877af913a2a170c2"
     case firstPage = "https://api.rawg.io/api/games?key=0e50318730bf4480877af913a2a170c2"

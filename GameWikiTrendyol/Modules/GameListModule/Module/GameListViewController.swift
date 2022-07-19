@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GameListViewController: UIViewController {
+final class GameListViewController: UIViewController {
 
     static let identifier: String = "GameListViewController"
     

@@ -8,7 +8,7 @@
 import Foundation
 
 
-class TabBarPresenter {
+final class TabBarPresenter {
     weak var view: TabBarViewIntercafe?
     var router: TabBarRouterInterface
     

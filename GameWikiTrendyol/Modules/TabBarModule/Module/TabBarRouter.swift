@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class TabBarRouter {
+final class TabBarRouter {
     weak var presenter: TabBarPresenterInterface?
     
     

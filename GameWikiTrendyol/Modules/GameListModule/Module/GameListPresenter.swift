@@ -9,7 +9,7 @@ import Foundation
 
  //typealias GameViewModel = (name:String, released:String)
 
-class GameListPresenter {
+final class GameListPresenter {
     weak var view: GameListViewInterface?
     var router: GameListRouterInterface
     var interactor: GameListInteractorInterface

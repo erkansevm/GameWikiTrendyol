@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class GameDetailRouter {
+final class GameDetailRouter {
     weak var presenter: GameDetailPresenter?
     static func createModule(gameId: Int) -> GameDetailViewController {
         print(gameId)
