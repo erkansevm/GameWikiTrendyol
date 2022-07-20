@@ -10,6 +10,7 @@ import Foundation
 enum GamesEndpoint {
     case gameList
     case gameDetail(id: Int)
+    case platforms
 }
 
 extension GamesEndpoint: Endpoint {
@@ -19,12 +20,14 @@ extension GamesEndpoint: Endpoint {
             return "/api/games"
         case .gameDetail(let id):
             return "/api/games/\(id)"
+        case .platforms:
+            return "/api/platforms/lists/parents"
         }
     }
 
     var method: RequestMethod {
         switch self {
-        case .gameList, .gameDetail:
+        case .gameList, .gameDetail , .platforms:
             return .get
         }
     }
@@ -33,7 +36,7 @@ extension GamesEndpoint: Endpoint {
     
     var body: [String: String]? {
         switch self {
-        case .gameList, .gameDetail:
+        case .gameList, .gameDetail, .platforms:
             return nil
         }
     }

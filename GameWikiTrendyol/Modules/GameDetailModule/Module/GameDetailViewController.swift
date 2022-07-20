@@ -61,6 +61,8 @@ extension GameDetailViewController: GameDetailViewInterface {
             print("no game")
             return
         }
+                   
+        print(game.descriptionRaw)
         print(game)
         DispatchQueue.main.async {
             self.nameLabel.text = game.name

@@ -26,13 +26,16 @@ protocol GameListPresenterInterface: AnyObject{
     func notifyViewLoaded()
     func notifyViewWillAppear()
     func didSelectRowAt(indexPath: IndexPath)
+    func didSelectPlatformAt(indexPath: IndexPath)
     func getGameModels() -> [Game]?
+    func getPlatforms() -> [Platform]?
     // GameListInteractor -> GameListPresenter
+    func platformsFetched(platforms:[Platform])
+    func platformFetchFailed(with errorMesssage: String)
     func gameListFetced(gameList:[Game])
     func gameListFetchFailed(with errorMessage:String)
-    func gameDetailFetced(with game:Game)
-    func gameDetailFethFailed(with errorMessage: String)
     func cellForItemAt(row: Int) -> Game?
+    func platformForItemAt(row: Int) -> Platform?
 }
 
 
@@ -46,5 +49,7 @@ protocol GameListRouterInterface {
 
 protocol GameListInteractorInterface {
     // GameListPresenter -> GameListInteractor
+    func fetchPlatforms()
     func fetchGameList()
+    func fetchGameListWithQuery(search: String?, platform: String?)
 }

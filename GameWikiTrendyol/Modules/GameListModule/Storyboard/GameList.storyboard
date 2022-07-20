@@ -17,8 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dXs-I5-mwd">
-                                <rect key="frame" x="20" y="44" width="374" height="818"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dXs-I5-mwd">
+                                <rect key="frame" x="20" y="161" width="374" height="701"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Dbk-bn-q7x">
                                     <size key="itemSize" width="128" height="128"/>
@@ -37,18 +37,57 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8DG-MK-b8E" userLabel="PlatformFilterCollectionView">
+                                <rect key="frame" x="20" y="103" width="374" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="s9P-Ms-eOu"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="C0B-XM-ytb">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="center" id="Isa-lA-Bs2">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="DBe-KO-mqy">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="bgY-5b-uzH">
+                                <rect key="frame" x="188.5" y="434.5" width="37" height="37"/>
+                            </activityIndicatorView>
+                            <searchBar contentMode="redraw" placeholder="Search game" translatesAutoresizingMaskIntoConstraints="NO" id="xzT-0j-eNt">
+                                <rect key="frame" x="20" y="44" width="374" height="51"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8Fi-UU-yLd"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="8Fi-UU-yLd" firstAttribute="top" secondItem="xzT-0j-eNt" secondAttribute="top" id="BB0-Oe-TZY"/>
+                            <constraint firstItem="8Fi-UU-yLd" firstAttribute="trailing" secondItem="8DG-MK-b8E" secondAttribute="trailing" constant="20" id="Dkf-Wa-VDs"/>
+                            <constraint firstItem="xzT-0j-eNt" firstAttribute="leading" secondItem="8DG-MK-b8E" secondAttribute="leading" id="JKb-bu-BT7"/>
+                            <constraint firstItem="bgY-5b-uzH" firstAttribute="centerX" secondItem="8Fi-UU-yLd" secondAttribute="centerX" id="JQ3-E6-mGQ"/>
+                            <constraint firstItem="8DG-MK-b8E" firstAttribute="leading" secondItem="8Fi-UU-yLd" secondAttribute="leading" constant="20" id="TDV-Ez-yTx"/>
                             <constraint firstItem="8Fi-UU-yLd" firstAttribute="trailing" secondItem="dXs-I5-mwd" secondAttribute="trailing" constant="20" id="cJb-Nv-uv6"/>
-                            <constraint firstItem="dXs-I5-mwd" firstAttribute="top" secondItem="8Fi-UU-yLd" secondAttribute="top" id="h27-zl-wnm"/>
+                            <constraint firstItem="dXs-I5-mwd" firstAttribute="top" secondItem="8DG-MK-b8E" secondAttribute="bottom" constant="8" id="cyb-L8-AqU"/>
+                            <constraint firstItem="8DG-MK-b8E" firstAttribute="top" secondItem="xzT-0j-eNt" secondAttribute="bottom" constant="8" id="dcZ-XU-hhy"/>
                             <constraint firstItem="dXs-I5-mwd" firstAttribute="leading" secondItem="8Fi-UU-yLd" secondAttribute="leading" constant="20" id="hMc-KR-tYr"/>
+                            <constraint firstItem="bgY-5b-uzH" firstAttribute="centerY" secondItem="8Fi-UU-yLd" secondAttribute="centerY" id="iyR-KP-VTO"/>
+                            <constraint firstItem="xzT-0j-eNt" firstAttribute="trailing" secondItem="8DG-MK-b8E" secondAttribute="trailing" id="ofw-WL-hcS"/>
                             <constraint firstItem="8Fi-UU-yLd" firstAttribute="bottom" secondItem="dXs-I5-mwd" secondAttribute="bottom" id="xWz-fl-NSK"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="bgY-5b-uzH" id="7K5-Jq-z1Q"/>
                         <outlet property="gameListCollectionView" destination="dXs-I5-mwd" id="rFh-an-EdE"/>
+                        <outlet property="platformFilterCollectionView" destination="8DG-MK-b8E" id="Cla-sn-GZy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rjp-Kj-jkD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

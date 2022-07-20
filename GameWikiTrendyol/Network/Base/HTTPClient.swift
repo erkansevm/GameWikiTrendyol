@@ -7,22 +7,25 @@
 import Foundation
 
 protocol HTTPClient {
-    func sendRequest<T: Decodable>(endpoint: Endpoint, responseModel: T.Type) async -> Result<T, RequestError>
+    func sendRequest<T: Decodable>(endpoint: Endpoint, responseModel: T.Type, query: [URLQueryItem]) async -> Result<T, RequestError>
 }
 
 extension HTTPClient {
     func sendRequest<T: Decodable>(
         endpoint: Endpoint,
-        responseModel: T.Type
+        responseModel: T.Type,
+        query: [URLQueryItem] = [URLQueryItem]()
     ) async -> Result<T, RequestError> {
         var urlComponents = URLComponents()
         urlComponents.scheme = endpoint.scheme
         urlComponents.host = endpoint.host
         urlComponents.path = endpoint.path
         let apiKeyQueryItem = URLQueryItem(name: "key", value: URLS.apiKey.rawValue)
-        urlComponents.queryItems = [apiKeyQueryItem]
+        var queryItems = query
+        queryItems.append(apiKeyQueryItem)
+        urlComponents.queryItems = queryItems
         
-        print(urlComponents.url)
+        print(urlComponents.url!)
         guard let url = urlComponents.url else {
             return .failure(.invalidURL)
         }
@@ -45,7 +48,7 @@ extension HTTPClient {
             case 200...299:
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
-                guard let decodedResponse = try? JSONDecoder().decode(responseModel, from: data) else {
+                guard let decodedResponse = try? decoder.decode(responseModel, from: data) else {
                     return .failure(.decode)
                 }
                 return .success(decodedResponse)
@@ -58,4 +61,6 @@ extension HTTPClient {
             return .failure(.unknown)
         }
     }
+    
+    
 }

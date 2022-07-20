@@ -13,7 +13,8 @@ final class GameListPresenter {
     weak var view: GameListViewInterface?
     var router: GameListRouterInterface
     var interactor: GameListInteractorInterface
-    var games: [Game]?
+    private var games: [Game]?
+    private var platforms: [Platform]?
     
     init(router: GameListRouterInterface, interactor: GameListInteractorInterface){
         self.router = router
@@ -25,15 +26,27 @@ final class GameListPresenter {
 }
 
 extension GameListPresenter: GameListPresenterInterface {
-    func gameDetailFetced(with game: Game) {
-        
+    func didSelectPlatformAt(indexPath: IndexPath) {
+        guard let platform = platforms?[indexPath.row] else {
+            return
+        }
+        view?.showLoading()
+        interactor.fetchGameListWithQuery(search: nil, platform: "\(platform.id)")
     }
     
-    func gameDetailFethFailed(with errorMessage: String) {
-        
+    func platformForItemAt(row: Int) -> Platform? {
+        let platform = platforms?[row]
+        return platform
     }
     
-
+    func platformFetchFailed(with errorMesssage: String) {
+        router.presentPopup(with: errorMesssage)
+    }
+    
+    func platformsFetched(platforms: [Platform]) {
+        self.platforms = platforms
+        view?.reloadData()
+    }
     
     func didSelectRowAt(indexPath: IndexPath) {
         guard let gameModel = games?[indexPath.row] else { return }
@@ -51,10 +64,16 @@ extension GameListPresenter: GameListPresenterInterface {
         return games
     }
     
+    func getPlatforms() -> [Platform]? {
+        return platforms
+    }
+    
     func notifyViewLoaded() {
         view?.setupInitialView()
         view?.showLoading()
         interactor.fetchGameList()
+        
+        interactor.fetchPlatforms()
     }
     
     func notifyViewWillAppear() {

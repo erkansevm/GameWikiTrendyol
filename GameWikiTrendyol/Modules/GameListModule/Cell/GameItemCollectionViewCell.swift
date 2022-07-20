@@ -14,11 +14,9 @@ final class GameItemCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        print("geldim")
-        
+        // Initialization code        
         contentView.layer.borderWidth = 1
-        contentView.layer.borderColor = UIColor.black.cgColor
+        contentView.layer.borderColor = UIColor.label.cgColor
         contentView.layer.cornerRadius = 12
         contentView.clipsToBounds = true
         contentView.layer.masksToBounds = true

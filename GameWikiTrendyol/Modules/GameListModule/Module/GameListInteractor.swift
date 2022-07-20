@@ -21,23 +21,51 @@ extension GameListInteractor: GameListInteractorInterface {
     func fetchNextPage(){
         
     }
-    func fetchGameList() {
-        /*
-        service.fetchFirstPage(expectedType: GameResult.self) {[weak self] result in
+    
+    func fetchPlatforms() {
+        Task(priority: .background) {
+            let result = await service2.getPlatforms()
             switch result {
-                
-            case .success(let gameResult):
-                self?.presenter?.gameListFetced(gameList: gameResult.results)
+            case .success(let platformResponse):
+                presenter?.platformsFetched(platforms: platformResponse.results)
+                print("platofrms -> \(platformResponse.results)")
             case .failure(let error):
-                self?.presenter?.gameListFetchFailed(with: error.localizedDescription)
+                presenter?.platformFetchFailed(with: error.localizedDescription)
             }
         }
-        */
+    }
+    
+    func fetchGameList() {
+
         Task(priority: .background) {
             
             let result = await service2.getGameList()
             switch result {
             case .success(let gameListResponse):
+                presenter?.gameListFetced(gameList: gameListResponse.results)
+            case .failure( let error):
+                presenter?.gameListFetchFailed(with: error.localizedDescription)
+            }
+        }
+         
+    }
+    
+    func fetchGameListWithQuery(search: String?, platform: String?){
+        Task(priority: .background) {
+            var queryItems = [URLQueryItem]()
+            if search != nil {
+                let searchQueryItem = URLQueryItem(name: "search", value: search)
+                queryItems.append(searchQueryItem)
+            }
+            if platform != nil {
+                let platformQueryItem = URLQueryItem(name: "parent_platforms", value: platform)
+                queryItems.append(platformQueryItem)
+            }
+            let result = await service2.getGameWithQuery(query: queryItems)
+            switch result {
+            case .success(let gameListResponse):
+                print("filtreli gameList")
+                print(gameListResponse)
                 presenter?.gameListFetced(gameList: gameListResponse.results)
             case .failure( let error):
                 presenter?.gameListFetchFailed(with: error.localizedDescription)
