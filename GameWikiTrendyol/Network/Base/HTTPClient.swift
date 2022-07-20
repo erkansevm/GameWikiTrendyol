@@ -20,7 +20,7 @@ extension HTTPClient {
         urlComponents.scheme = endpoint.scheme
         urlComponents.host = endpoint.host
         urlComponents.path = endpoint.path
-        let apiKeyQueryItem = URLQueryItem(name: "key", value: URLS.apiKey.rawValue)
+        let apiKeyQueryItem = URLQueryItem(name: "key", value: Constants .apiKey.rawValue)
         var queryItems = query
         queryItems.append(apiKeyQueryItem)
         urlComponents.queryItems = queryItems
@@ -42,6 +42,7 @@ extension HTTPClient {
         do {
             let (data, response) = try await URLSession.shared.data(for: request, delegate: nil)
             guard let response = response as? HTTPURLResponse else {
+                print("no response")
                 return .failure(.noResponse)
             }
             switch response.statusCode {
@@ -49,15 +50,21 @@ extension HTTPClient {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 guard let decodedResponse = try? decoder.decode(responseModel, from: data) else {
+                    
                     return .failure(.decode)
                 }
                 return .success(decodedResponse)
             case 401:
+                print("no unauthorized")
+
                 return .failure(.unauthorized)
             default:
+                print("no unexpectedStatusCode")
+
                 return .failure(.unexpectedStatusCode)
             }
         } catch {
+            print(error)
             return .failure(.unknown)
         }
     }

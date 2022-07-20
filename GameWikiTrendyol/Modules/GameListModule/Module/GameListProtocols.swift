@@ -16,7 +16,7 @@ protocol GameListViewInterface: AnyObject {
     func reloadData()
     func setupInitialView()
     func setScreenTitle(with title:String)
-    
+    func showNoResult()
 }
 
 
@@ -25,6 +25,8 @@ protocol GameListPresenterInterface: AnyObject{
     // GameListView -> GameListPresenter
     func notifyViewLoaded()
     func notifyViewWillAppear()
+    func notifySearchButtonPressed(search: String)
+    func notifySearchCancelButtonPressed()
     func didSelectRowAt(indexPath: IndexPath)
     func didSelectPlatformAt(indexPath: IndexPath)
     func getGameModels() -> [Game]?
@@ -51,5 +53,5 @@ protocol GameListInteractorInterface {
     // GameListPresenter -> GameListInteractor
     func fetchPlatforms()
     func fetchGameList()
-    func fetchGameListWithQuery(search: String?, platform: String?)
+    func fetchGameListWithQuery(search: String?, platform: Platform?)
 }

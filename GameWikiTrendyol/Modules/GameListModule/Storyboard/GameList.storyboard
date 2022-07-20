@@ -62,9 +62,9 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="bgY-5b-uzH">
                                 <rect key="frame" x="188.5" y="434.5" width="37" height="37"/>
                             </activityIndicatorView>
-                            <searchBar contentMode="redraw" placeholder="Search game" translatesAutoresizingMaskIntoConstraints="NO" id="xzT-0j-eNt">
+                            <searchBar contentMode="redraw" placeholder="Search game" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xzT-0j-eNt">
                                 <rect key="frame" x="20" y="44" width="374" height="51"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
                             </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8Fi-UU-yLd"/>
@@ -88,6 +88,7 @@
                         <outlet property="activityIndicator" destination="bgY-5b-uzH" id="7K5-Jq-z1Q"/>
                         <outlet property="gameListCollectionView" destination="dXs-I5-mwd" id="rFh-an-EdE"/>
                         <outlet property="platformFilterCollectionView" destination="8DG-MK-b8E" id="Cla-sn-GZy"/>
+                        <outlet property="searchBar" destination="xzT-0j-eNt" id="cQd-RP-i5p"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rjp-Kj-jkD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

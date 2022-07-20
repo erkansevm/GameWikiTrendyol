@@ -8,7 +8,6 @@
 import Foundation
 
 final class GameListInteractor {
-    let service = NetworkManager()
     weak var presenter: GameListPresenterInterface?
     var next: String?
     var prev: String?
@@ -50,7 +49,7 @@ extension GameListInteractor: GameListInteractorInterface {
          
     }
     
-    func fetchGameListWithQuery(search: String?, platform: String?){
+    func fetchGameListWithQuery(search: String?, platform: Platform?){
         Task(priority: .background) {
             var queryItems = [URLQueryItem]()
             if search != nil {
@@ -58,7 +57,11 @@ extension GameListInteractor: GameListInteractorInterface {
                 queryItems.append(searchQueryItem)
             }
             if platform != nil {
-                let platformQueryItem = URLQueryItem(name: "parent_platforms", value: platform)
+                guard let platform = platform else {
+                    return
+                }
+
+                let platformQueryItem = URLQueryItem(name: "parent_platforms", value: "\(platform.id)" )
                 queryItems.append(platformQueryItem)
             }
             let result = await service2.getGameWithQuery(query: queryItems)
@@ -68,6 +71,7 @@ extension GameListInteractor: GameListInteractorInterface {
                 print(gameListResponse)
                 presenter?.gameListFetced(gameList: gameListResponse.results)
             case .failure( let error):
+                print(error)
                 presenter?.gameListFetchFailed(with: error.localizedDescription)
             }
         }

@@ -9,7 +9,6 @@ import Foundation
 
 
 final class GameDetailInteractor {
-    let service = NetworkManager()
     weak var presenter: GameDetailPresenter?
     let service2 = GameService()
     
@@ -37,7 +36,7 @@ extension GameDetailInteractor: GameDetailInteractorInterface {
             case .success(let gameDetail):
                 presenter?.gameDetailFetched(gameDetail: gameDetail)
             case .failure(let error):
-                presenter?.gameDetailFethFailed(error: NetworkError.failedToFetch)
+                presenter?.gameDetailFethFailed(error: error.localizedDescription)
             }
         }
     }

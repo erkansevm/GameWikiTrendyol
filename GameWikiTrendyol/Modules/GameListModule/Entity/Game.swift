@@ -10,7 +10,5 @@ import Foundation
 struct Game: Codable {
     let id : Int
     let name: String
-    let released: String
-    let metacritic: Int?
-    let description_raw: String?
+    
 }

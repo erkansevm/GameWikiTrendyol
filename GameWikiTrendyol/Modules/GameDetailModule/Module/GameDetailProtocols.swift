@@ -37,7 +37,7 @@ protocol GameDetailPresenterInterface: AnyObject {
     func didTapVisitWebsite()
     
     func gameDetailFetched(gameDetail: GameDetail)
-    func gameDetailFethFailed(error: NetworkError)
+    func gameDetailFethFailed(error: String)
 }
 
 

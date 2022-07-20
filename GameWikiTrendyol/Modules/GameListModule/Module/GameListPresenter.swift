@@ -15,6 +15,8 @@ final class GameListPresenter {
     var interactor: GameListInteractorInterface
     private var games: [Game]?
     private var platforms: [Platform]?
+    private var selectedPlatform: Platform?
+    private var searchText: String?
     
     init(router: GameListRouterInterface, interactor: GameListInteractorInterface){
         self.router = router
@@ -30,8 +32,21 @@ extension GameListPresenter: GameListPresenterInterface {
         guard let platform = platforms?[indexPath.row] else {
             return
         }
+        selectedPlatform = platform
         view?.showLoading()
-        interactor.fetchGameListWithQuery(search: nil, platform: "\(platform.id)")
+        interactor.fetchGameListWithQuery(search: searchText, platform: selectedPlatform)
+    }
+    
+    func notifySearchButtonPressed(search: String){
+        searchText = search
+        view?.showLoading()
+        interactor.fetchGameListWithQuery(search: searchText, platform: selectedPlatform)
+    }
+    
+    func notifySearchCancelButtonPressed(){
+        searchText = nil
+        view?.showLoading()
+        interactor.fetchGameListWithQuery(search: searchText, platform: selectedPlatform)
     }
     
     func platformForItemAt(row: Int) -> Platform? {
@@ -50,7 +65,6 @@ extension GameListPresenter: GameListPresenterInterface {
     
     func didSelectRowAt(indexPath: IndexPath) {
         guard let gameModel = games?[indexPath.row] else { return }
-        print(gameModel)
         router.goGameDetail(with: gameModel.id)
     }
     
@@ -72,7 +86,6 @@ extension GameListPresenter: GameListPresenterInterface {
         view?.setupInitialView()
         view?.showLoading()
         interactor.fetchGameList()
-        
         interactor.fetchPlatforms()
     }
     
@@ -83,15 +96,12 @@ extension GameListPresenter: GameListPresenterInterface {
  
     
     func gameListFetced(gameList: [Game]) {
-//        var gameViewModels = [GameViewModel]()
-//        for game in gameList {
-//            let gameViewModel: GameViewModel = (game.name, game.released)
-//            gameViewModels.append(gameViewModel)
-//        }
-//        self.gameViewModels = gameViewModels
         self.games = gameList
         view?.hideLoading()
         view?.reloadData()
+        if games?.count == 0 {
+            view?.showNoResult()
+        }
     }
     
     func gameListFetchFailed(with errorMessage: String) {

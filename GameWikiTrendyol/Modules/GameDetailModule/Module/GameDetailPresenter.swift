@@ -48,8 +48,8 @@ extension GameDetailPresenter: GameDetailPresenterInterface {
         view?.changeDescp(with: descExpanded)
     }
     
-    func gameDetailFethFailed(error: NetworkError) {
-        print(error.localizedDescription)
+    func gameDetailFethFailed(error: String) {
+        print(error)
     }
     
     func gameDetailFetched(gameDetail: GameDetail) {

@@ -16,7 +16,9 @@ final class GameListViewController: UIViewController {
     @IBOutlet weak var gameListCollectionView: UICollectionView!
     @IBOutlet weak var platformFilterCollectionView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
+    @IBOutlet weak var searchBar: UISearchBar!
+    let noResultLabel = UILabel()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.notifyViewLoaded()
@@ -30,6 +32,14 @@ final class GameListViewController: UIViewController {
 }
 
 extension GameListViewController: GameListViewInterface {
+    func showNoResult() {
+        DispatchQueue.main.async {
+            self.noResultLabel.isHidden = false
+            self.gameListCollectionView.isHidden = true
+        }
+        
+    }
+    
     func showLoading() {
         DispatchQueue.main.async {
             self.gameListCollectionView.isHidden = true
@@ -50,6 +60,9 @@ extension GameListViewController: GameListViewInterface {
         DispatchQueue.main.async {
             self.gameListCollectionView.reloadData()
             self.platformFilterCollectionView.reloadData()
+            self.gameListCollectionView.isHidden = false
+            self.noResultLabel.isHidden = true
+
         }
         
     }
@@ -66,6 +79,15 @@ extension GameListViewController: GameListViewInterface {
         platformFilterCollectionView.setCollectionViewLayout(createPlatformFilterCompositionalLayout(), animated: false)
         platformFilterCollectionView.register(UINib(nibName: "PlatformCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PlatformCell")
      
+        searchBar.delegate = self
+        
+        noResultLabel.text = "No games has been found"
+        noResultLabel.textColor = .label
+        noResultLabel.font = UIFont.preferredFont(forTextStyle: .title2)
+        noResultLabel.textAlignment = .center
+        noResultLabel.frame = self.view.bounds
+        self.view.addSubview(noResultLabel)
+        
     }
     
     func setScreenTitle(with title: String) {
@@ -103,7 +125,7 @@ extension GameListViewController: UICollectionViewDataSource, UICollectionViewDe
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameItemCell", for: indexPath) as! GameItemCollectionViewCell
             let game = presenter?.cellForItemAt(row: indexPath.row)
-            cell.configure(viewModel: game ?? Game(id: 0, name: "no data", released: "no data", metacritic: 0, description_raw: " "))
+            cell.configure(viewModel: game ?? Game(id: 0, name: "no data"))
             return cell
         }
        
@@ -117,6 +139,21 @@ extension GameListViewController: UICollectionViewDataSource, UICollectionViewDe
         presenter?.didSelectRowAt(indexPath: indexPath)
     }
 
+}
+
+extension GameListViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let searchText = searchBar.text else {
+            return
+        }
+        searchBar.text = nil
+        presenter?.notifySearchButtonPressed(search: searchText)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = nil
+        presenter?.notifySearchCancelButtonPressed()
+    }
 }
 
 
@@ -156,9 +193,10 @@ extension GameListViewController {
         item.contentInsets = .init(top: 5, leading: 5, bottom: 5, trailing: 5)
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(0.65))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
+        group.interItemSpacing = .fixed(4)
         let section = NSCollectionLayoutSection(group: group)
         
-        section.interGroupSpacing = 2
+        section.interGroupSpacing = 4
         
 
         
