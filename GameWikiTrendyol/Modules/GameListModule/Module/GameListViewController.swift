@@ -131,7 +131,7 @@ extension GameListViewController: UICollectionViewDataSource, UICollectionViewDe
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameItemCell", for: indexPath) as! GameItemCollectionViewCell
             let game = presenter?.cellForItemAt(row: indexPath.row)
-            cell.configure(viewModel: game ?? Game(id: 0, name: "no data"))
+            cell.configure(viewModel: game ?? Game(id: 0, name: "no data",backgroundImage: "none"))
             return cell
         }
        
@@ -208,7 +208,7 @@ extension GameListViewController {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = .init(top: 5, leading: 5, bottom: 5, trailing: 5)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(0.65))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(0.75  ))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
         group.interItemSpacing = .fixed(4)
         let section = NSCollectionLayoutSection(group: group)

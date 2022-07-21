@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class GameDetailViewController: UIViewController {
     
@@ -18,7 +19,7 @@ final class GameDetailViewController: UIViewController {
     @IBOutlet weak var publishersLabel: UILabel!
     @IBOutlet weak var visitRedditStack: UIStackView!
     @IBOutlet weak var visitWebsiteStack: UIStackView!
-    
+    @IBOutlet weak var gameImageView: UIImageView!
     
     
     var presenter: GameDetailPresenterInterface?
@@ -61,6 +62,10 @@ extension GameDetailViewController: GameDetailViewInterface {
             print("no game")
             return
         }
+        
+        guard let url = URL(string: game.backgroundImage!) else {
+            return
+        }
                    
         DispatchQueue.main.async {
             self.nameLabel.text = game.name
@@ -74,7 +79,10 @@ extension GameDetailViewController: GameDetailViewInterface {
             self.visitWebsiteStack.isHidden = game.website != nil ? false : true
             self.metacriticLabel.textColor = game.color ?? .label
             self.metacriticLabel.borderColor = game.color ?? .label
+            self.gameImageView.kf.setImage(with: url)
+
         }
+       
         
     }
     

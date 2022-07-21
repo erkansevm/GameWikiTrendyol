@@ -20,6 +20,7 @@ struct GameDetail: Codable {
     let publishers: [Publisher]?
     let redditUrl: String?
     let website: String?
+    let backgroundImage: String?
     var genresString: String {
         get {
             var genresString = ""
