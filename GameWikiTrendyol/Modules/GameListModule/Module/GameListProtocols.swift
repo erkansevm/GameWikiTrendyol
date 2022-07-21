@@ -13,7 +13,8 @@ import Foundation
 protocol GameListViewInterface: AnyObject {
     func showLoading()
     func hideLoading()
-    func reloadData()
+    func reloadGameListData()
+    func reloadPlatformData()
     func setupInitialView()
     func setScreenTitle(with title:String)
     func showNoResult()

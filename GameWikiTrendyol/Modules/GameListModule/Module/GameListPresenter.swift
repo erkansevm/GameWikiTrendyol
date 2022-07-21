@@ -60,7 +60,7 @@ extension GameListPresenter: GameListPresenterInterface {
     
     func platformsFetched(platforms: [Platform]) {
         self.platforms = platforms
-        view?.reloadData()
+        view?.reloadPlatformData()
     }
     
     func didSelectRowAt(indexPath: IndexPath) {
@@ -98,7 +98,7 @@ extension GameListPresenter: GameListPresenterInterface {
     func gameListFetced(gameList: [Game]) {
         self.games = gameList
         view?.hideLoading()
-        view?.reloadData()
+        view?.reloadGameListData()
         if games?.count == 0 {
             view?.showNoResult()
         }

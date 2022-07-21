@@ -56,15 +56,20 @@ extension GameListViewController: GameListViewInterface {
         }
     }
     
-    func reloadData() {
+    func reloadGameListData() {
         DispatchQueue.main.async {
             self.gameListCollectionView.reloadData()
-            self.platformFilterCollectionView.reloadData()
             self.gameListCollectionView.isHidden = false
             self.noResultLabel.isHidden = true
 
         }
         
+    }
+    
+    func reloadPlatformData() {
+        DispatchQueue.main.async {
+            self.platformFilterCollectionView.reloadData()
+        }
     }
     
     func setupInitialView() {
@@ -87,6 +92,7 @@ extension GameListViewController: GameListViewInterface {
         noResultLabel.textAlignment = .center
         noResultLabel.frame = self.view.bounds
         self.view.addSubview(noResultLabel)
+        noResultLabel.isHidden = true
         
     }
     
@@ -134,11 +140,22 @@ extension GameListViewController: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView.tag == self.platformFilterCollectionView.tag {
             presenter?.didSelectPlatformAt(indexPath: indexPath)
+            if let cell = collectionView.cellForItem(at: indexPath) as? PlatformCollectionViewCell {
+                cell.cellSelected()
+            }
             return
         }
         presenter?.didSelectRowAt(indexPath: indexPath)
     }
-
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if collectionView.tag == self.platformFilterCollectionView.tag {
+            if let cell = collectionView.cellForItem(at: indexPath) as? PlatformCollectionViewCell {
+                cell.didDeselected()
+            }
+            return
+        }
+    }
 }
 
 extension GameListViewController: UISearchBarDelegate {

@@ -62,8 +62,6 @@ extension GameDetailViewController: GameDetailViewInterface {
             return
         }
                    
-        print(game.descriptionRaw)
-        print(game)
         DispatchQueue.main.async {
             self.nameLabel.text = game.name
             self.metacriticLabel.text = "\(game.metacritic ?? -1)"

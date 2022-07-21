@@ -10,6 +10,7 @@ import UIKit
 class PlatformCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var platformName: UILabel!
+    @IBOutlet weak var containerView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -19,6 +20,21 @@ class PlatformCollectionViewCell: UICollectionViewCell {
     
     func configure(name: String){
         platformName.text = name
+    }
+    
+    func cellSelected(){
+        containerView.backgroundColor = .label
+        platformName.textColor = .systemBackground
+    }
+    
+    func didDeselected(){
+        containerView.backgroundColor = .tertiarySystemGroupedBackground
+        platformName.textColor = .label
+    }
+    
+    override func prepareForReuse() {
+        containerView.backgroundColor = .tertiarySystemGroupedBackground
+        platformName.textColor = .label
     }
     
 /*
