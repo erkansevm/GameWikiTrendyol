@@ -58,7 +58,11 @@ extension GameDetailViewController: GameDetailViewInterface {
     }
     
     func setupData(){
-        guard let game = presenter?.getGameDetail() else {
+        guard let presenter = presenter else  {
+            return
+        }
+        
+        guard let game = presenter.getGameDetail() else {
             print("no game")
             return
         }

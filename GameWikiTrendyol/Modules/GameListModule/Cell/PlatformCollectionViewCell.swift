@@ -25,11 +25,13 @@ class PlatformCollectionViewCell: UICollectionViewCell {
     func cellSelected(){
         containerView.backgroundColor = .label
         platformName.textColor = .systemBackground
+        isSelected = true
     }
     
     func didDeselected(){
         containerView.backgroundColor = .tertiarySystemGroupedBackground
         platformName.textColor = .label
+        isSelected = false
     }
     
     override func prepareForReuse() {

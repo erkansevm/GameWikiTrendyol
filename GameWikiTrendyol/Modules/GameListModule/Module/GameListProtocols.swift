@@ -13,6 +13,7 @@ import Foundation
 protocol GameListViewInterface: AnyObject {
     func showLoading()
     func hideLoading()
+    func bottomLoadingState(shouldShow: Bool)
     func reloadGameListData()
     func reloadPlatformData()
     func setupInitialView()
@@ -26,17 +27,19 @@ protocol GameListPresenterInterface: AnyObject{
     // GameListView -> GameListPresenter
     func notifyViewLoaded()
     func notifyViewWillAppear()
-    func notifySearchButtonPressed(search: String)
+    func notifySearchButtonPressed()
     func notifySearchCancelButtonPressed()
+    func notifyFetchNext() 
     func didSelectRowAt(indexPath: IndexPath)
     func didSelectPlatformAt(indexPath: IndexPath)
-    func getGameModels() -> [Game]?
-    func getPlatforms() -> [Platform]?
+    func didDeSelectPlatform()
+    func getGameModels() -> [Game]
+    func getPlatforms() -> [Platform]
+    func updateSerchTerm(text: String)
     // GameListInteractor -> GameListPresenter
-    func platformsFetched(platforms:[Platform])
-    func platformFetchFailed(with errorMesssage: String)
-    func gameListFetced(gameList:[Game])
-    func gameListFetchFailed(with errorMessage:String)
+    func platformsFetched(result: Result<PlatformResponse, RequestError>)
+    func gameListNextFetched(result: Result<GameResult,RequestError>)
+    func gameListFetced(result: Result<GameResult, RequestError>)
     func cellForItemAt(row: Int) -> Game?
     func platformForItemAt(row: Int) -> Platform?
 }
@@ -55,4 +58,5 @@ protocol GameListInteractorInterface {
     func fetchPlatforms()
     func fetchGameList()
     func fetchGameListWithQuery(search: String?, platform: Platform?)
+    func fetchGameListNext(url: String)
 }

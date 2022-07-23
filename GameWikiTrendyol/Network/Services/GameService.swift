@@ -12,9 +12,14 @@ protocol IGameService {
     func getGameDetail(id: Int) async -> Result<GameDetail, RequestError>
     func getPlatforms() async -> Result<PlatformResponse, RequestError>
     func getGameWithQuery(query: [URLQueryItem]) async -> Result<GameResult, RequestError>
+    func getGameListWithUrl(url: String) async -> Result<GameResult,RequestError>
 }
 
 struct GameService: HTTPClient, IGameService {
+    func getGameListWithUrl(url: String) async -> Result<GameResult, RequestError> {
+        return await sendRequestWithUrl(url: url, responseModel: GameResult.self)
+    }
+    
     func getGameWithQuery(query: [URLQueryItem]) async -> Result<GameResult, RequestError> {
        
         return await sendRequest(endpoint: GamesEndpoint.gameList, responseModel: GameResult.self, query: query)

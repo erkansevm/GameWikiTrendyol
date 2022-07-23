@@ -62,6 +62,12 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="bgY-5b-uzH">
                                 <rect key="frame" x="188.5" y="434.5" width="37" height="37"/>
                             </activityIndicatorView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="jv1-FV-pAI" userLabel="bottomLoading">
+                                <rect key="frame" x="188.5" y="862" width="37" height="0.0"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="vIt-dt-Eyd"/>
+                                </constraints>
+                            </activityIndicatorView>
                             <searchBar contentMode="redraw" placeholder="Search game" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xzT-0j-eNt">
                                 <rect key="frame" x="20" y="44" width="374" height="51"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="search"/>
@@ -75,17 +81,20 @@
                             <constraint firstItem="xzT-0j-eNt" firstAttribute="leading" secondItem="8DG-MK-b8E" secondAttribute="leading" id="JKb-bu-BT7"/>
                             <constraint firstItem="bgY-5b-uzH" firstAttribute="centerX" secondItem="8Fi-UU-yLd" secondAttribute="centerX" id="JQ3-E6-mGQ"/>
                             <constraint firstItem="8DG-MK-b8E" firstAttribute="leading" secondItem="8Fi-UU-yLd" secondAttribute="leading" constant="20" id="TDV-Ez-yTx"/>
+                            <constraint firstItem="8Fi-UU-yLd" firstAttribute="bottom" secondItem="jv1-FV-pAI" secondAttribute="bottom" id="WAS-sm-KhQ"/>
                             <constraint firstItem="8Fi-UU-yLd" firstAttribute="trailing" secondItem="dXs-I5-mwd" secondAttribute="trailing" constant="20" id="cJb-Nv-uv6"/>
                             <constraint firstItem="dXs-I5-mwd" firstAttribute="top" secondItem="8DG-MK-b8E" secondAttribute="bottom" constant="8" id="cyb-L8-AqU"/>
                             <constraint firstItem="8DG-MK-b8E" firstAttribute="top" secondItem="xzT-0j-eNt" secondAttribute="bottom" constant="8" id="dcZ-XU-hhy"/>
+                            <constraint firstItem="jv1-FV-pAI" firstAttribute="centerX" secondItem="8Fi-UU-yLd" secondAttribute="centerX" id="eaY-ls-oWy"/>
                             <constraint firstItem="dXs-I5-mwd" firstAttribute="leading" secondItem="8Fi-UU-yLd" secondAttribute="leading" constant="20" id="hMc-KR-tYr"/>
                             <constraint firstItem="bgY-5b-uzH" firstAttribute="centerY" secondItem="8Fi-UU-yLd" secondAttribute="centerY" id="iyR-KP-VTO"/>
+                            <constraint firstItem="jv1-FV-pAI" firstAttribute="top" secondItem="dXs-I5-mwd" secondAttribute="bottom" id="ocd-H5-R17"/>
                             <constraint firstItem="xzT-0j-eNt" firstAttribute="trailing" secondItem="8DG-MK-b8E" secondAttribute="trailing" id="ofw-WL-hcS"/>
-                            <constraint firstItem="8Fi-UU-yLd" firstAttribute="bottom" secondItem="dXs-I5-mwd" secondAttribute="bottom" id="xWz-fl-NSK"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="bgY-5b-uzH" id="7K5-Jq-z1Q"/>
+                        <outlet property="bottomLoading" destination="jv1-FV-pAI" id="2lK-Q5-itc"/>
                         <outlet property="gameListCollectionView" destination="dXs-I5-mwd" id="rFh-an-EdE"/>
                         <outlet property="platformFilterCollectionView" destination="8DG-MK-b8E" id="Cla-sn-GZy"/>
                         <outlet property="searchBar" destination="xzT-0j-eNt" id="cQd-RP-i5p"/>
@@ -93,7 +102,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rjp-Kj-jkD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="55" y="83"/>
+            <point key="canvasLocation" x="53.623188405797109" y="82.366071428571431"/>
         </scene>
     </scenes>
     <resources>

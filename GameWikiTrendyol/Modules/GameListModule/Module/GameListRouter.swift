@@ -50,7 +50,6 @@ extension GameListRouter: GameListRouterInterface {
             let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "AllRight", style: .default, handler: nil))
             self.navigationController?.visibleViewController?.present(alertController, animated: true, completion: nil)
-            
         }
     }
     

@@ -8,6 +8,7 @@ import Foundation
 
 protocol HTTPClient {
     func sendRequest<T: Decodable>(endpoint: Endpoint, responseModel: T.Type, query: [URLQueryItem]) async -> Result<T, RequestError>
+    func sendRequestWithUrl<T: Decodable>(url: String, responseModel: T.Type) async -> Result<T, RequestError>
 }
 
 extension HTTPClient {
@@ -29,8 +30,6 @@ extension HTTPClient {
         guard let url = urlComponents.url else {
             return .failure(.invalidURL)
         }
-        print("girdim")
-
         
         var request = URLRequest(url: url)
         request.httpMethod = endpoint.method.rawValue
@@ -69,5 +68,49 @@ extension HTTPClient {
         }
     }
     
+    func sendRequestWithUrl<T: Decodable>(
+        url: String,
+        responseModel: T.Type
+    ) async -> Result<T, RequestError> {
+    
+        guard let url = URL(string: url) else {
+            return .failure(.invalidURL)
+        }
+
+        
+        var request = URLRequest(url: url)
+        request.httpMethod  = "GET"
+
+        
+        do {
+            let (data, response) = try await URLSession.shared.data(for: request, delegate: nil)
+            guard let response = response as? HTTPURLResponse else {
+                print("no response")
+                return .failure(.noResponse)
+            }
+            switch response.statusCode {
+            case 200...299:
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                guard let decodedResponse = try? decoder.decode(responseModel, from: data) else {
+                    
+                    return .failure(.decode)
+                }
+                return .success(decodedResponse)
+            case 401:
+                print("no unauthorized")
+
+                return .failure(.unauthorized)
+            default:
+                print("no unexpectedStatusCode")
+
+                return .failure(.unexpectedStatusCode)
+            }
+        } catch {
+            print(error)
+            return .failure(.unknown)
+        }
+    }
+
     
 }

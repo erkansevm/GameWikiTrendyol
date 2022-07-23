@@ -27,6 +27,8 @@ final class GameItemCollectionViewCell: UICollectionViewCell {
 
     func configure(viewModel: Game){
         nameLabel.text = viewModel.name
-        gameImage.kf.setImage(with: URL(string: viewModel.backgroundImage!))
+        if let backgroundImage = viewModel.backgroundImage {
+            gameImage.kf.setImage(with: URL(string: backgroundImage))
+        }
     }
 }
